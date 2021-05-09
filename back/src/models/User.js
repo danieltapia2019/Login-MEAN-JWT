@@ -1,5 +1,6 @@
-const {Schema,model} = require('mongoose')
-const bcrypt = require('bcryptjs')
+import {Schema,model} from 'mongoose'
+import bcrypt from 'bcryptjs'
+
 const userSchema = new Schema({
     username:{
         type: String,

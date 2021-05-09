@@ -1,6 +1,7 @@
-const sign = require('../middlewares/sign') 
-const {Router} = require('express')
-const authCtrl = require('../controllers/authController')
+import sign from '../middlewares/sign'
+import {Router} from 'express'
+import authCtrl from '../controllers/authController'
+
 const router = Router()
 
 router.post('/signin', authCtrl.signIn)

@@ -1,7 +1,8 @@
-import config from '../config'
-const User = require('../models/User')
-const jwt = require('jsonwebtoken')
+import 'dotenv/config'
+import User from '../models/User'
+import jwt from 'jsonwebtoken'
 
+const secret = process.env.SECRET || "authKey"
 const authController={}
 authController.signUp = async (req,res) =>{
     const{username,email,password} = req.body;
@@ -15,7 +16,7 @@ authController.signUp = async (req,res) =>{
     const token = jwt.sign({
         id: savedUser._id,
         username: savedUser.username,
-        email:savedUser.email},config.SECRET,{
+        email:savedUser.email},secret,{
         expiresIn:60
     })
     
@@ -35,7 +36,7 @@ authController.signIn = async (req,res) =>{
             const token = jwt.sign({
                 id: userFound._id,
                 username: userFound.username,
-                email:userFound.email},config.SECRET,{
+                email:userFound.email},secret,{
                 expiresIn:60
             })
             return res.status(200).json({message:"Usuario logueado",token})

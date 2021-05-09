@@ -1,6 +1,7 @@
-const mongoose = require ( 'mongoose')
+import mongoose from "mongoose"
 
-mongoose.connect("mongodb://localhost/mean-login",{
+const URI = process.env.MONGO_DB_URI || "mongodb://localhost/mean-login"
+mongoose.connect(URI,{
     useFindAndModify:true,
     useNewUrlParser:true,
     useUnifiedTopology:true,

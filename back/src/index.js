@@ -1,5 +1,6 @@
-require('./database')
-const server = require('./app')
+import 'dotenv/config'
+import "./database"
+import server from './app'
 
 server.listen(server.get('port'))
 
