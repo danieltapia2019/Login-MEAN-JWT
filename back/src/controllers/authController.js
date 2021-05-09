@@ -12,7 +12,10 @@ authController.signUp = async (req,res) =>{
         password: await User.encryptPass(password) //encriptar pass
     })
     const savedUser = await newUser.save()
-    const token = jwt.sign({id: savedUser._id},config.SECRET,{
+    const token = jwt.sign({
+        id: savedUser._id,
+        username: savedUser.username,
+        email:savedUser.email},config.SECRET,{
         expiresIn:60
     })
     
@@ -29,7 +32,10 @@ authController.signIn = async (req,res) =>{
         const match = await User.comparePass(password,userFound.password)
         //Contraseña correcta
         if(match){
-            const token = jwt.sign({id: userFound._id},config.SECRET,{
+            const token = jwt.sign({
+                id: userFound._id,
+                username: userFound.username,
+                email:userFound.email},config.SECRET,{
                 expiresIn:60
             })
             return res.status(200).json({message:"Usuario logueado",token})
